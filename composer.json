@@ -1,0 +1,16 @@
+{
+    "name": "orba/magento2-coding-standard",
+    "description": "Magento 2 Coding Standard used by Orba",
+    "type": "library",
+    "require": {
+        "magento/magento-coding-standard": "^6",
+        "slevomat/coding-standard": "^7.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Orba",
+            "email": "info@orba.co"
+        }
+    ]
+}
