@@ -14,13 +14,22 @@
         <severity>7</severity>
         <type>warning</type>
     </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation">
+        <exclude-pattern>*/Api/*</exclude-pattern>
+    </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint">
         <severity>7</severity>
         <type>warning</type>
     </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.UselessAnnotation">
+        <exclude-pattern>*/Api/*</exclude-pattern>
+    </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
         <severity>7</severity>
         <type>warning</type>
+    </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.UselessAnnotation">
+        <exclude-pattern>*/Api/*</exclude-pattern>
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint">
         <severity>7</severity>
