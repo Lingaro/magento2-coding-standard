@@ -163,22 +163,22 @@ class FileCommentSniff implements Sniff
                     $isOrbaNamespace = $tokens[$namespaceStart + 2]['content'] === 'Orba';
                 }
                 if ($isOrbaNamespace) {
-                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (Orba). All rights reserved.$/', $tokens[$string]['content']) === 0) {
-                        $error = 'Expected "Copyright © <DATE> Orba. All rights reserved." for copyright declaration';
+                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? Orba Sp\. z o\.o\. All rights reserved\.$/', $tokens[$string]['content']) === 0) {
+                        $error = 'Expected "Copyright © <DATE> Orba Sp. z o.o. All rights reserved." for copyright declaration';
                         $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectCopyright');
                         if ($fix === true) {
                             $matches = [];
-                            preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (Orba). All rights reserved.$/', $tokens[$string]['content'], $matches);
+                            preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (Orba). All rights reserved\.$/', $tokens[$string]['content'], $matches);
                             if (isset($matches[1]) === false) {
                                 $matches[1] = date('Y');
                             }
 
-                            $expected = 'Copyright © ' . $matches[1] . ' Orba. All rights reserved.';
+                            $expected = 'Copyright © ' . $matches[1] . ' Orba Sp. z o.o. All rights reserved.';
                             $phpcsFile->fixer->replaceToken($string, $expected);
                         }
                     }
                 } else {
-                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (.*). All rights reserved.$/', $tokens[$string]['content']) === 0) {
+                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (.*)\. All rights reserved\.$/', $tokens[$string]['content']) === 0) {
                         $error = 'Expected "Copyright © <DATE> <COMPANY>. All rights reserved." for copyright declaration';
                         $phpcsFile->addError($error, $tag, 'IncorrectCopyright');
                     }

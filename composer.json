@@ -2,7 +2,7 @@
     "name": "orba/magento2-coding-standard",
     "description": "Magento 2 Coding Standard used by Orba",
     "type": "library",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "require": {
         "magento/magento-coding-standard": "^6",
         "slevomat/coding-standard": "^6.4"
