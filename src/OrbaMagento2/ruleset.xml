@@ -1,15 +1,36 @@
 <?xml version="1.0"?>
 <!--
 /**
- * @copyright Copyright © 2021 Orba. All rights reserved.
+ * @copyright Copyright © 2022 ORBA. All rights reserved.
  * @author    info@orba.co
  */
- -->
+-->
 <ruleset name="OrbaMagento2"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./../../vendor/squizlabs/php_codesniffer/phpcs.xsd">
-    <description>Orba Magento2 Coding Standard</description>
+    <description>ORBA Magento2 Coding Standard</description>
+    <exclude-pattern>*\.xml</exclude-pattern>
     <rule ref="Magento2"/>
+    <rule ref="Magento2.Commenting.ClassPropertyPHPDocFormatting">
+        <severity>5</severity>
+        <type>warning</type>
+        <!--
+        /**
+         * Misinterprets the presence of readonly, doesn't detect type hints
+         * and interferes with SlevomatCodingStandard.TypeHints.PropertyTypeHint.UselessAnnotation
+         */
+        -->
+        <exclude name="Magento2.Commenting.ClassPropertyPHPDocFormatting.Missing"/>
+    </rule>
+    <rule ref="Magento2.Annotation">
+        <severity>5</severity>
+        <type>warning</type>
+        <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodAnnotation"/>
+        <exclude name="Magento2.Annotation.MethodAnnotationStructure.MethodArguments"/>
+        <exclude name="Magento2.Annotation.MethodArguments.ArgumentMissing"/>
+        <exclude name="Magento2.Annotation.MethodArguments.NoCommentBlock"/>
+        <exclude name="Magento2.Annotation.MethodArguments.ParamMissing"/>
+    </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
         <severity>7</severity>
         <type>warning</type>
@@ -47,12 +68,12 @@
     <rule ref="Squiz.NamingConventions.ValidVariableName">
         <severity>7</severity>
         <type>warning</type>
-        <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
+        <exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
     </rule>
     <rule ref="Squiz.NamingConventions.ValidFunctionName">
         <severity>7</severity>
         <type>warning</type>
-        <exclude name="Squiz.NamingConventions.ValidFunctionName.PrivateNoUnderscore" />
+        <exclude name="Squiz.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
     </rule>
     <rule ref="OrbaMagento2.Commenting.FileComment">
         <severity>7</severity>

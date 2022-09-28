@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright © 2022 ORBA. All rights reserved.
+ * @author    info@orba.co
+ */
+-->
+<ruleset name="OrbaMagento2PHPMD"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
+         xsi:noNamespaceSchemaLocation="https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+    <description>ORBA Magento2 Coding Standard for PHPMD</description>
+    <rule ref="rulesets/cleancode.xml"/>
+    <rule ref="rulesets/codesize.xml"/>
+    <rule ref="rulesets/design.xml"/>
+    <rule ref="rulesets/naming.xml">
+        <exclude name="LongVariable"/>
+    </rule>
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <properties>
+            <property name="maximum" value="33"/>
+        </properties>
+    </rule>
+    <rule ref="rulesets/unusedcode.xml"/>
+    <rule ref="rulesets/controversial.xml"/>
+</ruleset>

@@ -1,17 +1,25 @@
 <?xml version="1.0"?>
 <!--
 /**
- * @copyright Copyright © 2021 Orba. All rights reserved.
+ * @copyright Copyright © 2022 ORBA. All rights reserved.
  * @author    info@orba.co
  */
- -->
+-->
 <ruleset name="OrbaMagento2Xml"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./../../vendor/squizlabs/php_codesniffer/phpcs.xsd">
-    <description>Orba Magento2 Coding Standard for XMLs</description>
+    <description>ORBA Magento2 Coding Standard for XMLs</description>
     <arg name="extensions" value="xml"/>
     <rule ref="OrbaMagento2Xml.Commenting.FileComment">
         <severity>7</severity>
+        <type>warning</type>
+    </rule>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+        <severity>6</severity>
         <type>warning</type>
     </rule>
 </ruleset>

@@ -1,19 +1,22 @@
 {
     "name": "orba/magento2-coding-standard",
-    "description": "Magento 2 Coding Standard used by Orba",
+    "description": "Magento 2 Coding Standard used by ORBA",
+    "version": "1.1.0",
     "type": "library",
-    "version": "1.0.2",
-    "require": {
-        "magento/magento-coding-standard": "^6",
-        "slevomat/coding-standard": "^6.4"
-    },
+    "keywords": ["magento2", "phpcs", "phpmd"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Orba",
+            "name": "ORBA",
             "email": "info@orba.co"
         }
     ],
+    "require": {
+        "magento/magento-coding-standard": "dev-master",
+        "slevomat/coding-standard": "^8.5.1",
+        "squizlabs/php_codesniffer": "^3.7.1",
+        "phpmd/phpmd": "^2.13.0"
+    },
     "autoload": {
         "psr-4": {
             "Orba\\Magento2CodingStandard\\": "src/OrbaMagento2/",
