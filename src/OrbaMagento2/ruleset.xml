@@ -10,6 +10,8 @@
          xsi:noNamespaceSchemaLocation="./../../vendor/squizlabs/php_codesniffer/phpcs.xsd">
     <description>ORBA Magento2 Coding Standard</description>
     <exclude-pattern>*\.xml</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/web/*</exclude-pattern>
     <rule ref="Magento2"/>
     <rule ref="Magento2.Commenting.ClassPropertyPHPDocFormatting">
         <severity>5</severity>
