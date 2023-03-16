@@ -12,6 +12,22 @@
     <exclude-pattern>*\.xml</exclude-pattern>
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/web/*</exclude-pattern>
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <severity>5</severity>
+        <type>warning</type>
+        <!--
+        /**
+         * Interferes with PSR2.Methods.FunctionCallSignature.Indent
+         */
+        -->
+        <exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"/>
+        <!--
+        /**
+         * It doesn't work well with the php tags in the mixed phtml file
+         */
+        -->
+        <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"/>
+    </rule>
     <rule ref="PSR12"/>
     <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
         <!--
@@ -41,6 +57,7 @@
         <exclude name="Magento2.Annotation.MethodArguments.ArgumentMissing"/>
         <exclude name="Magento2.Annotation.MethodArguments.NoCommentBlock"/>
         <exclude name="Magento2.Annotation.MethodArguments.ParamMissing"/>
+        <exclude name="Magento2.Annotation.MethodArguments.VisualAlignment"/>
     </rule>
     <rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
     <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
