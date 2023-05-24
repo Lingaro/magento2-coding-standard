@@ -1,13 +1,12 @@
 <?php
-
 /**
- * @copyright Copyright © 2021 Orba. All rights reserved.
- * @author    info@orba.co
+ * Copyright © 2023 Lingaro sp. z o.o. All rights reserved.
+ * See LICENSE for license details.
  */
 
 declare(strict_types=1);
 
-namespace Orba\Magento2CodingStandard\Sniffs\Commenting;
+namespace Lingaro\Magento2CodingStandard\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -116,99 +115,64 @@ class FileCommentSniff implements Sniff
             $phpcsFile->addError($error, $commentEnd, 'SpacingAfterComment');
         }
 
-        // Required tags in correct order.
-        $required = [
-            '@copyright'  => true,
-            '@author'     => true,
-        ];
-
-        $foundTags = [];
-        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
-            $name       = $tokens[$tag]['content'];
-            $isRequired = isset($required[$name]);
-
-            if ($isRequired === true && in_array($name, $foundTags, true) === true) {
-                $error = 'Only one %s tag is allowed in a file comment';
-                $data  = [$name];
-                $phpcsFile->addError($error, $tag, 'Duplicate'.ucfirst(substr($name, 1)).'Tag', $data);
+        $key = $commentStart;
+        $copyrightMissed = true;
+        while ($key < $commentEnd) {
+            $firstStringKey = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $key, $commentEnd);
+            if ($firstStringKey === false) {
+                break;
             }
+            $key = $firstStringKey + 1;
 
-            $foundTags[] = $name;
+            $tokenCopyright = $tokens[$firstStringKey];
+            $isCopyrightInString = strpos($tokenCopyright['content'], 'Copyright ©') !== false;
 
-            if ($isRequired === false) {
-                continue;
-            }
+            if ($isCopyrightInString) {
+                $copyrightMissed = false;
 
-            $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $tag, $commentEnd);
-            if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line']) {
-                $error = 'Content missing for %s tag in file comment';
-                $data  = [$name];
-                $phpcsFile->addError($error, $tag, 'Empty'.ucfirst(substr($name, 1)).'Tag', $data);
-                continue;
-            }
-
-            if ($name === '@author') {
-                if ($tokens[$string]['content'] !== 'info@orba.co') {
-                    $error = 'Expected "info@orba.co" for author tag';
-                    $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectAuthor');
-                    if ($fix === true) {
-                        $expected = 'info@orba.co';
-                        $phpcsFile->fixer->replaceToken($string, $expected);
-                    }
-                }
-            } else if ($name === '@copyright') {
-                $isOrbaNamespace = false;
+                $isLingaroNamespace = false;
                 $namespaceStart = $phpcsFile->findNext(T_NAMESPACE, $stackPtr + 1);
                 if ($namespaceStart !== false) {
-                    $isOrbaNamespace = $tokens[$namespaceStart + 2]['content'] === 'Orba';
+                    $isLingaroNamespace = $tokens[$namespaceStart + 2]['content'] === 'Lingaro';
                 }
-                if ($isOrbaNamespace) {
-                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? Orba Sp\. z o\.o\. All rights reserved\.$/', $tokens[$string]['content']) === 0) {
-                        $error = 'Expected "Copyright © <DATE> Orba Sp. z o.o. All rights reserved." for copyright declaration';
-                        $fix   = $phpcsFile->addFixableError($error, $tag, 'IncorrectCopyright');
+                if ($isLingaroNamespace) {
+                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? Lingaro Sp\. z o\.o\. All rights reserved\.$/', $tokenCopyright['content']) === 0) {
+                        $error = 'Expected "Copyright © <DATE> Lingaro Sp. z o.o. All rights reserved." for copyright declaration';
+                        $fix = $phpcsFile->addFixableError($error, $firstStringKey, 'IncorrectCopyright');
                         if ($fix === true) {
                             $matches = [];
-                            preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (Orba). All rights reserved\.$/', $tokens[$string]['content'], $matches);
+                            preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (Lingaro). All rights reserved\.$/', $tokenCopyright['content'], $matches);
                             if (isset($matches[1]) === false) {
                                 $matches[1] = date('Y');
                             }
 
-                            $expected = 'Copyright © ' . $matches[1] . ' Orba Sp. z o.o. All rights reserved.';
-                            $phpcsFile->fixer->replaceToken($string, $expected);
+                            $expected = 'Copyright © ' . $matches[1] . ' Lingaro Sp. z o.o. All rights reserved.';
+                            $phpcsFile->fixer->replaceToken($firstStringKey, $expected);
                         }
                     }
                 } else {
-                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (.*)\. All rights reserved\.$/', $tokens[$string]['content']) === 0) {
-                        $error = 'Expected "Copyright © <DATE> <COMPANY>. All rights reserved." for copyright declaration';
-                        $phpcsFile->addError($error, $tag, 'IncorrectCopyright');
+                    if (preg_match('/^Copyright © ([0-9]{4})(-[0-9]{4})? (.*)\. All rights reserved\.$/', $tokenCopyright['content']) === 0) {
+                        $error = 'Expected "Copyright © <DATE> <COMPANY>. All rights reserved." for copyright declaration.';
+                        $phpcsFile->addError($error, $firstStringKey, 'IncorrectCopyright');
                     }
                 }
-            }//end if
-        }//end foreach
 
-        // Check if the tags are in the correct position.
-        $pos = 0;
-        foreach ($required as $tag => $true) {
-            if (in_array($tag, $foundTags, true) === false) {
-                $error = 'Missing %s tag in file comment';
-                $data  = [$tag];
-                $phpcsFile->addError($error, $commentEnd, 'Missing'.ucfirst(substr($tag, 1)).'Tag', $data);
+                $secondStringKey = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $key, $commentEnd);
+                $tokenLicenseStr = $tokens[$secondStringKey];
+                $expectedLicense = 'See LICENSE for license details.';
+
+                if ($secondStringKey === false || trim($tokenLicenseStr['content']) !== trim($expectedLicense)) {
+                    $error = 'Expected "' . $expectedLicense . '" for copyright declaration';
+                    $phpcsFile->addError($error, $firstStringKey + 2, 'IncorrectLicenseText');
+                    break;
+                }
             }
+        }
 
-            if (isset($foundTags[$pos]) === false) {
-                break;
-            }
-
-            if ($foundTags[$pos] !== $tag) {
-                $error = 'The tag in position %s should be the %s tag';
-                $data  = [
-                    ($pos + 1),
-                    $tag,
-                ];
-                $phpcsFile->addError($error, $tokens[$commentStart]['comment_tags'][$pos], ucfirst(substr($tag, 1)).'TagOrder', $data);
-            }
-
-            $pos++;
+        if ($copyrightMissed) {
+            $firstStarAfterCommentStartKey = $phpcsFile->findNext(T_DOC_COMMENT_STAR, ($stackPtr + 1), $commentEnd);
+            $error = 'Expected "Copyright © <DATE> <COMPANY>. All rights reserved." for copyright declaration.';
+            $phpcsFile->addError($error, $firstStarAfterCommentStartKey, 'MissedCopyright');
         }
 
         // Ignore the rest of the file.

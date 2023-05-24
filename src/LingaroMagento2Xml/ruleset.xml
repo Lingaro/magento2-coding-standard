@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!--
 /**
- * @copyright Copyright © 2022 ORBA. All rights reserved.
- * @author    info@orba.co
+ * Copyright © 2023 Lingaro sp. z o.o. All rights reserved.
+ * See LICENSE for license details.
  */
 -->
-<ruleset name="OrbaMagento2Xml"
+<ruleset name="LingaroMagento2Xml"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./../../vendor/squizlabs/php_codesniffer/phpcs.xsd">
-    <description>ORBA Magento2 Coding Standard for XMLs</description>
+    <description>Lingaro Magento2 Coding Standard for XMLs</description>
     <arg name="extensions" value="xml"/>
-    <rule ref="OrbaMagento2Xml.Commenting.FileComment">
+    <rule ref="LingaroMagento2Xml.Commenting.FileComment">
         <severity>7</severity>
         <type>warning</type>
     </rule>

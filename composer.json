@@ -1,10 +1,10 @@
 {
-    "name": "orba/magento2-coding-standard",
-    "description": "Magento 2 Coding Standard used by ORBA",
+    "name": "lingaro/magento2-coding-standard",
+    "description": "Magento 2 Coding Standard used by Lingaro",
     "version": "2.2.0",
     "type": "phpcodesniffer-standard",
     "keywords": [
-        "orba",
+        "lingaro",
         "code quality",
         "coding standards",
         "magento2",
@@ -15,8 +15,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "ORBA",
-            "email": "info@orba.co"
+            "name": "Lingaro sp. z o.o.",
+            "homepage": "https://lingarogroup.com/"
         }
     ],
     "require": {
@@ -27,8 +27,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Orba\\Magento2CodingStandard\\": "src/OrbaMagento2/",
-            "Orba\\Magento2CodingStandardXml\\": "src/OrbaMagento2Xml/"
+            "Lingaro\\Magento2CodingStandard\\": "src/LingaroMagento2/",
+            "Lingaro\\Magento2CodingStandardXml\\": "src/LingaroMagento2Xml/"
         }
     },
     "config": {
