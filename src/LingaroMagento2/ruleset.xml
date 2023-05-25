@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!--
 /**
- * @copyright Copyright © 2022 ORBA. All rights reserved.
- * @author    info@orba.co
+ * Copyright © 2023 Lingaro sp. z o.o. All rights reserved.
+ * See LICENSE for license details.
  */
 -->
-<ruleset name="OrbaMagento2"
+<ruleset name="LingaroMagento2"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./../../vendor/squizlabs/php_codesniffer/phpcs.xsd">
-    <description>ORBA Magento2 Coding Standard</description>
+    <description>Lingaro Magento2 Coding Standard</description>
     <exclude-pattern>*\.xml</exclude-pattern>
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/web/*</exclude-pattern>
@@ -107,7 +107,7 @@
         <type>warning</type>
         <exclude name="Squiz.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
     </rule>
-    <rule ref="OrbaMagento2.Commenting.FileComment">
+    <rule ref="LingaroMagento2.Commenting.FileComment">
         <severity>7</severity>
         <type>warning</type>
     </rule>
