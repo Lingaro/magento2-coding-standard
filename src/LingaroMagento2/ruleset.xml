@@ -89,8 +89,6 @@
         <severity>7</severity>
         <type>warning</type>
         <properties>
-            <property name="newlinesCountBetweenOpenTagAndDeclare" value="2"/>
-            <property name="newlinesCountAfterDeclare" value="2"/>
             <property name="spacesCountAroundEqualsSign" value="0"/>
         </properties>
     </rule>

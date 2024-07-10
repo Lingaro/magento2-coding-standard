@@ -1,7 +1,7 @@
 {
     "name": "lingaro/magento2-coding-standard",
     "description": "Magento 2 Coding Standard used by Lingaro",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "type": "phpcodesniffer-standard",
     "keywords": [
         "lingaro",
